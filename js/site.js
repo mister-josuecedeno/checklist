@@ -28,6 +28,7 @@ function toggleComplete() {}
 function deleteTask() {}
 function editTask() {}
 function getUUID() {
+  // https://github.com/uuidjs/uuid
   return uuidv4();
 }
 
@@ -49,6 +50,12 @@ function displayData(checklistArray) {
   // Number format reference https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp
   for (let i = 0; i < checklistArray.length; i++) {
     const dataRow = document.importNode(myTemplate.content, true);
+
+    // Checkbox
+    let isChecked = checklistArray[i].complete;
+    let checkbox = `<input type="checkbox" name="chkComplete" id="chkComplete" checked="${isChecked}"/>`;
+
+    dataRow.getElementById('complete').innerHTML = checkbox;
 
     dataRow.getElementById('id').textContent = checklistArray[i].id;
     dataRow.getElementById('title').textContent = checklistArray[i].title;
