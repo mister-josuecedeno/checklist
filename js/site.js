@@ -22,17 +22,31 @@ var seedData = [
   },
 ];
 
-// This for TESTING PURPOSE (Comment out later)
-displayData(seedData);
-
 // MODEL Functions
 
 // Placeholder for data sources
 var modelData = [];
 
-function getLocalStorage() {}
+buildList();
 
-function setLocalStorage(array) {}
+function buildList() {
+  // This for TESTING PURPOSE (Comment out later)
+  // modelData = seedData;
+
+  // Change source to LocalStorage
+  setLocalStorage(seedData);
+  modelData = getLocalStorage();
+
+  displayData(modelData);
+}
+
+function getLocalStorage() {
+  return JSON.parse(localStorage.getItem('taskArray')) || [];
+}
+
+function setLocalStorage(array) {
+  localStorage.setItem('taskArray', JSON.stringify(array));
+}
 
 // CONTROL Functions
 
@@ -101,7 +115,8 @@ function displayData(checklistArray) {
 }
 
 // Format Date
-function formatDate(date) {
+function formatDate(strDate) {
+  const date = new Date(strDate);
   const day = date.getDate(); // Returns the date
   const month = date.getMonth(); // Returns the month
   const year = date.getFullYear(); // Returns the year
