@@ -8,8 +8,35 @@ var seedData = [
   },
 ];
 
+// This for TESTING PURPOSE (Comment out later)
 displayData(seedData);
-console.log(getUUID());
+
+// MODEL Functions
+
+// Placeholder for data sources
+var modelData = [];
+
+function getLocalStorage() {}
+
+function setLocalStorage(array) {}
+
+// CONTROL Functions
+
+//     CRUD Functions
+function addTask() {}
+function toggleComplete() {}
+function deleteTask() {}
+function editTask() {}
+function getUUID() {
+  return uuidv4();
+}
+
+//     Filter Functions
+function showIncompletes() {}
+function showAll() {}
+function showDueToday() {}
+
+// DISPLAY (View) Functions
 
 // Display checklist data
 function displayData(checklistArray) {
@@ -43,9 +70,4 @@ function formatDate(date) {
   const month = date.getMonth(); // Returns the month
   const year = date.getFullYear(); // Returns the year
   return `${month}/${day}/${year}`;
-}
-
-// Create UUID
-function getUUID() {
-  return uuidv4();
 }
