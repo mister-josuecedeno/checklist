@@ -13,6 +13,13 @@ var seedData = [
     createdDate: new Date(),
     dueDate: new Date(),
   },
+  {
+    complete: false,
+    id: 'test3',
+    title: 'Test Title 3',
+    createdDate: new Date(),
+    dueDate: new Date(),
+  },
 ];
 
 // This for TESTING PURPOSE (Comment out later)
@@ -31,6 +38,7 @@ function setLocalStorage(array) {}
 
 //     CRUD Functions
 function addTask() {}
+
 function toggleComplete(e) {
   if (e.checked) {
     console.log('checked');
@@ -38,8 +46,15 @@ function toggleComplete(e) {
     console.log('not checked');
   }
 }
-function deleteTask() {}
-function editTask() {}
+
+function deleteTask(e) {
+  console.log('Delete me!');
+}
+
+function editTask(e) {
+  console.log('Edit me!');
+}
+
 function getUUID() {
   // https://github.com/uuidjs/uuid
   return uuidv4();
