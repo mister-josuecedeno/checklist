@@ -99,7 +99,7 @@
             <div
               class="section bg-dark text-white p-3 rounded shadow-sm bg-opacity"
             >
-              <h2 class="mb-4">Checklist</h2>
+              <!-- <h2 class="mb-4">Checklist</h2> -->
               <div class="mb-3">
                 <div class="btn btn-success">
                   <i class="fas fa-plus"></i> Add Task
@@ -109,11 +109,12 @@
               <table class="table table-striped bg-white" id="event">
                 <thead class="thead-light">
                   <tr>
+                    <th></th>
                     <th class="d-none d-md-block">ID</th>
                     <th>Title</th>
                     <th>Created</th>
                     <th>Due Date</th>
-                    <th>Controls</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody id="resultsBody">
@@ -135,11 +136,19 @@
     <!-- Template doesn't render on the body -->
     <template id="Data-Template">
       <tr>
+        <td><input type="checkbox" name="" id="" /></td>
         <td id="id" class="d-none d-md-block"></td>
         <td id="title"></td>
         <td id="createdDate"></td>
         <td id="dueDate"></td>
-        <td id="controls"></td>
+        <td id="controls">
+          <button class="btn btn-success">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button class="btn btn-danger">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </td>
       </tr>
     </template>
 
@@ -163,6 +172,9 @@
 
     <!-- Sweet Alerts -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <!-- UUID -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
 
     <!-- Custom JS -->
     <script src="/js/site.js"></script>

@@ -1,97 +1,18 @@
-function buildPaymentSchedule() {
-  let isValid = validateForm();
-  if (!isValid) {
-    // Add a sweet alert ... https://sweetalert2.github.io/
-    Swal.fire(
-      'Oops...',
-      'Please enter a value greater than zero in all fields',
-      'error'
-    );
-    return false;
-  }
+var seedData = [
+  {
+    complete: false,
+    id: 'test1',
+    title: 'Test Title',
+    createdDate: new Date(),
+    dueDate: new Date(),
+  },
+];
 
-  let loan = +document.getElementById('loanAmount').value;
-  let months = +document.getElementById('loanTerm').value * 12;
-  let mthRate = (+document.getElementById('loanRate').value * 0.01) / 12;
+displayData(seedData);
+console.log(getUUID());
 
-  let payment = calculatePayment(loan, months, mthRate);
-  let paymentArray = getPayments(loan, payment, months, mthRate);
-  displayStats(payment, loan, paymentArray);
-  displayData(paymentArray);
-  return false;
-}
-
-// Calculate Payment
-function calculatePayment(loan, months, mthRate) {
-  let x = Math.pow(1 + mthRate, months);
-  return (loan * x * mthRate) / (x - 1);
-
-  // Source: https://www.oreilly.com/library/view/javascript-the-definitive/0596000480/ch01s08.html
-}
-
-// Get Payments (build payment array)
-function getPayments(loan, payment, months, mthRate) {
-  let paymentArray = [];
-  let totalInterest = 0;
-  let balance = loan;
-  let interest = 0;
-  let principal = 0;
-
-  for (let i = 1; i <= months; i++) {
-    let obj = {};
-
-    interest = balance * mthRate;
-    principal = payment - interest;
-    totalInterest += interest;
-    balance -= principal;
-
-    obj['month'] = i;
-    obj['payment'] = payment;
-    obj['principal'] = principal;
-    obj['interest'] = interest;
-    obj['totalInterest'] = totalInterest;
-    obj['balance'] = Math.abs(balance); // Fix negative value
-
-    paymentArray.push(obj);
-  }
-
-  return paymentArray;
-}
-
-// Set Stats
-function displayStats(payment, loan, paymentArray) {
-  // Total Interest
-  let totalInterest = paymentArray.reduce((acc, cv) => acc + cv.interest, 0);
-  let totalCost = totalInterest + loan;
-
-  document.getElementById('payment').innerHTML = payment.toLocaleString(
-    'en-US',
-    { style: 'currency', currency: 'USD' }
-  );
-  document.getElementById('totalPrincipal').innerHTML = loan.toLocaleString(
-    'en-US',
-    {
-      style: 'currency',
-      currency: 'USD',
-    }
-  );
-  document.getElementById(
-    'totalInterest'
-  ).innerHTML = totalInterest.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-  document.getElementById('totalCost').innerHTML = totalCost.toLocaleString(
-    'en-US',
-    {
-      style: 'currency',
-      currency: 'USD',
-    }
-  );
-}
-
-// Display event data
-function displayData(paymentArray) {
+// Display checklist data
+function displayData(checklistArray) {
   const myTemplate = document.getElementById('Data-Template');
   const resultsBody = document.getElementById('resultsBody');
 
@@ -99,57 +20,32 @@ function displayData(paymentArray) {
   resultsBody.innerHTML = '';
 
   // Number format reference https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp
-  for (let i = 0; i < paymentArray.length; i++) {
+  for (let i = 0; i < checklistArray.length; i++) {
     const dataRow = document.importNode(myTemplate.content, true);
 
-    dataRow.getElementById('month').textContent = paymentArray[i].month;
-    dataRow.getElementById('payment').textContent = paymentArray[
-      i
-    ].payment.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('principal').textContent = paymentArray[
-      i
-    ].principal.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('interest').textContent = paymentArray[
-      i
-    ].interest.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('totalInterest').textContent = paymentArray[
-      i
-    ].totalInterest.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('balance').textContent = paymentArray[
-      i
-    ].balance.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
+    dataRow.getElementById('id').textContent = checklistArray[i].id;
+    dataRow.getElementById('title').textContent = checklistArray[i].title;
+    dataRow.getElementById('createdDate').textContent = formatDate(
+      checklistArray[i].createdDate
+    );
+    dataRow.getElementById('dueDate').textContent = formatDate(
+      checklistArray[i].dueDate
+    );
+    // dataRow.getElementById('controls').textContent = checklistArray[i].controls;
 
     resultsBody.appendChild(dataRow);
   }
 }
 
-// Form Validation - Is every field a number greater than 0?
-function validateForm() {
-  let amount = +document.getElementById('loanAmount').value;
-  let term = +document.getElementById('loanTerm').value;
-  let rate = +document.getElementById('loanRate').value;
+// Format Date
+function formatDate(date) {
+  const day = date.getDate(); // Returns the date
+  const month = date.getMonth(); // Returns the month
+  const year = date.getFullYear(); // Returns the year
+  return `${month}/${day}/${year}`;
+}
 
-  let isValid = [amount, term, rate].every((field) => field > 0);
-
-  return isValid;
+// Create UUID
+function getUUID() {
+  return uuidv4();
 }
