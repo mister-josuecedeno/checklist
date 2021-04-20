@@ -1,0 +1,185 @@
+/* Color Palette from Adobe Color */
+/* #45BF41 */
+/* #F2D22E */
+/* #F2B263 */
+/* #F2DCC9 */
+/* #0D0D0D */
+
+/* Base Colors */
+/* #4A8CFF */
+/* #FFBD4A  */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+
+  /* background-color: #1D976C; */
+
+  /* background-image: url('/img/scott-webb-1ddol8rgUH8-unsplash.jpg');
+  background-position: center; */
+
+  background: #757f9a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #d7dde8,
+    #757f9a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #d7dde8,
+    #757f9a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.blur-img {
+  background-image: url('/img/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg');
+  background-position: center;
+  filter: blur(4px);
+  /* filter: grayscale(100%); */
+}
+
+.bg-opacity {
+  opacity: 0.8;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px;
+  /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+h1,
+h2,
+h3,
+h4,
+#logo,
+.fab {
+  /* color: #d21335; */
+  /* color: #f79326; */
+  color: #ffbd4a;
+  /* color: black; */
+}
+
+#logo {
+  /* color: white; */
+  color: #ffbd4a;
+}
+
+.fab {
+  /* color: #f79326; */
+  color: #ffbd4a;
+}
+
+p,
+label {
+  /* font-weight: 500; */
+  font-size: 1.125rem;
+}
+
+.fab {
+  font-size: 1.125rem;
+}
+
+p .fab {
+  font-size: 2.5rem;
+}
+
+/* Change size of Bootstrap badge */
+.badge {
+  font-size: 1.125rem;
+}
+
+/* Hero Image */
+#hero-image {
+  max-height: 40vh;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0px;
+  /* border: solid; */
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.row > div {
+  margin-bottom: 15px;
+}
+
+.content {
+  min-height: 300px;
+  background: #dbdfe5;
+}
+
+.content.bg-alt {
+  background: #b4bac0;
+}
+
+.sidebar-top {
+  min-height: 140px;
+  background: #dbdfe7;
+}
+
+.sidebar-bottom {
+  min-height: 145px;
+  background: #7e8aa0;
+  margin-bottom: -15px;
+}
+
+.sidebar,
+.content {
+  min-height: 300px;
+}
+
+.content-top {
+  min-height: 160px;
+  background: #b4bac0;
+}
+
+.content-bottom {
+  min-height: 125px;
+  background: #7e8aa0;
+  margin-bottom: -15px;
+}
+
+.content-bottom.bg-alt {
+  background: #9ca5b6;
+}
+
+@media (max-width: 991px) {
+  .content-bottom {
+    margin-bottom: 15px;
+  }
+
+  .content-bottom.bg-alt {
+    margin-bottom: -15px;
+  }
+}
+
+.intro {
+  min-height: 250px;
+}
+
+.section {
+  min-height: 150px;
+}

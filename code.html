@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mortgage Calculator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Favicons -->
+    <link href="/img/favicon.ico" rel="icon" />
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Sticky footer CSS -->
+    <link rel="stylesheet" href="./css/site.css" />
+
+    <!-- Prism -->
+    <link rel="stylesheet" href="/css/prism-twilight.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" id="logo" href="index.html">Coding Challenge</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="app.html">The App</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="code.html"
+                >See The Code <span class="sr-only">(current)</span></a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://github.com/mister-josuecedeno/mortgage-calculator"
+                target="_blank"
+                >Get The Code</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About The Developer</a>
+            </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li> -->
+          </ul>
+          <!-- <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main">
+      <!-- Add HTML later -->
+      <div class="container mt-5">
+        <!-- Card -->
+        <div class="row">
+          <div class="col">
+            <!-- Try a card -->
+            <div class="card mt-5 shadow bg-dark bg-opacity">
+              <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
+              <div class="card-body">
+                <h4 class="card-title border-bottom p-1">
+                  &lt;/&gt; Code Review
+                </h4>
+                <!-- Introduction -->
+                <section>
+                  <p class="text-white">
+                    The application populates two sections using the following
+                    functions:
+                  </p>
+                  <ul class="text-light">
+                    <li>buildPaymentSchedule</li>
+                    <li>calculatePayment</li>
+                    <li>getPayments</li>
+                    <li>displayStats</li>
+                    <li>displayData</li>
+                  </ul>
+                  <h6 class="card-text ml-1 mb-3 text-white">
+                    Click the section links below to learn more about the code.
+                  </h6>
+                </section>
+
+                <!-- Collapsible Sections -->
+                <div class="accordion" id="accordionMortgageCalculator">
+                  <!-- Build Payment Schedule -->
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseBuildPaymentSchedule"
+                          aria-expanded="true"
+                          aria-controls="collapseBuildPaymentSchedule"
+                        >
+                          Build Payment Schedule
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div
+                      id="collapseBuildPaymentSchedule"
+                      class="collapse show"
+                      aria-labelledby="headingOne"
+                      data-parent="#accordionMortgageCalculator"
+                    >
+                      <div class="card-body">
+                        <h5>Build Payment Schedule</h5>
+                        <p class="mb-3">
+                          This function is the trigger point of the application.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 3 - 5</span>
+                          Return the required form data.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Line 7</span>
+                          Returns the mortgage payment using the provided form
+                          data.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Line 8</span>
+                          Returns the calculated array of payments based on the
+                          variables provided.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 9 - 10</span>
+                          Call the functions which will display the data
+                          statistics and schedule.
+                        </p>
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Build Payment Schedule
+function buildPaymentSchedule() {
+  let loan = +document.getElementById('loanAmount').value;
+  let months = +document.getElementById('loanTerm').value * 12;
+  let mthRate = (+document.getElementById('loanRate').value * 0.01) / 12;
+
+  let payment = calculatePayment(loan, months, mthRate);
+  let paymentArray = getPayments(loan, payment, months, mthRate);
+  displayStats(payment, loan, paymentArray);
+  displayData(paymentArray);
+  return false;
+}
+</code></pre>
+                        <!-- End Code -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Event Data -->
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseCalculatePayment"
+                          aria-expanded="false"
+                          aria-controls="collapseCalculatePayment"
+                        >
+                          Calculate Payment
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseCalculatePayment"
+                      class="collapse"
+                      aria-labelledby="headingTwo"
+                      data-parent="#accordionMortgageCalculator"
+                    >
+                      <div class="card-body">
+                        <h5>Calculate Payment</h5>
+
+                        <p class="mb-3">
+                          Standard mortgage payment calculation sourced from
+                          Oreilly.com
+                        </p>
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Calculate Payment
+function calculatePayment(loan, months, mthRate) {
+  let x = Math.pow(1 + mthRate, months);
+  return (loan * x * mthRate) / (x - 1);
+
+  // Source: https://www.oreilly.com/library/view/javascript-the-definitive/0596000480/ch01s08.html
+}
+</code></pre>
+                        <!-- End Code -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Get Payments -->
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseGetPayments"
+                          aria-expanded="false"
+                          aria-controls="collapseGetPayments"
+                        >
+                          Get Payments
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseGetPayments"
+                      class="collapse"
+                      aria-labelledby="headingThree"
+                      data-parent="#accordionMortgageCalculator"
+                    >
+                      <div class="card-body">
+                        <h5>Get Payments</h5>
+                        <p class="mb-3">
+                          The objective of function is to return the
+                          amortization data as an array.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 9 - 25</span>
+                          A for loop is used to iteratively build the array by
+                          calculating a data object for each month.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 12 - 15</span>
+                          Calculates those variables which change with each
+                          iteration.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 17 - 22</span>
+                          Populate an object with the required fields. This
+                          object is then pushed to the array.
+                        </p>
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Get Payments (build payment array)
+function getPayments(loan, payment, months, mthRate) {
+  let paymentArray = [];
+  let totalInterest = 0;
+  let balance = loan;
+  let interest = 0;
+  let principal = 0;
+
+  for (let i = 1; i <= months; i++) {
+    let obj = {};
+
+    interest = balance * mthRate;
+    principal = payment - interest;
+    totalInterest += interest;
+    balance -= principal;
+
+    obj['month'] = i;
+    obj['payment'] = payment;
+    obj['principal'] = principal;
+    obj['interest'] = interest;
+    obj['totalInterest'] = totalInterest;
+    obj['balance'] = Math.abs(balance); // Fix negative value
+
+    paymentArray.push(obj);
+  }                          
+</code></pre>
+                        <!-- End Code -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Display Stats -->
+                  <div class="card">
+                    <div class="card-header" id="headingFour">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseDisplayStats"
+                          aria-expanded="false"
+                          aria-controls="collapseDisplayStats"
+                        >
+                          Display Stats
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseDisplayStats"
+                      class="collapse"
+                      aria-labelledby="headingFour"
+                      data-parent="#accordionMortgageCalculator"
+                    >
+                      <div class="card-body">
+                        <h5>Display Stats</h5>
+                        <p class="mb-3">
+                          This function provides the view of the final array
+                          summary statistics. Note that key information for some
+                          fields has already been provided by the function
+                          arguments.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 4 - 5</span>
+                          Calculate the total interest using the reduce function
+                          and total cost. All of the remaining fields have been
+                          provided in the function call.
+                        </p>
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Set Stats
+function displayStats(payment, loan, paymentArray) {
+  // Total Interest
+  let totalInterest = paymentArray.reduce((acc, cv) => acc + cv.interest, 0);
+  let totalCost = totalInterest + loan;
+
+  document.getElementById('payment').innerHTML = payment.toLocaleString(
+    'en-US',
+    { style: 'currency', currency: 'USD' }
+  );
+  document.getElementById('totalPrincipal').innerHTML = loan.toLocaleString(
+    'en-US',
+    {
+      style: 'currency',
+      currency: 'USD',
+    }
+  );
+  document.getElementById(
+    'totalInterest'
+  ).innerHTML = totalInterest.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+  document.getElementById('totalCost').innerHTML = totalCost.toLocaleString(
+    'en-US',
+    {
+      style: 'currency',
+      currency: 'USD',
+    }
+  );
+}
+                          
+</code></pre>
+                        <!-- End Code -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Display Data -->
+                  <div class="card">
+                    <div class="card-header" id="headingFive">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseDisplayData"
+                          aria-expanded="false"
+                          aria-controls="collapseDisplayData"
+                        >
+                          Display Data
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseDisplayData"
+                      class="collapse"
+                      aria-labelledby="headingFive"
+                      data-parent="#accordionMortgageCalculator"
+                    >
+                      <div class="card-body">
+                        <h5>Display Data</h5>
+                        <p class="mb-3">
+                          Templates are used to pull the data and dynamically
+                          populate the HTML. This technique is particularly
+                          powerful as it keeps the HTML out of the Javascript.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 3 and 4</span>
+                          Identifies the template and the code destination.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Line 10</span> In the
+                          for loop a copy of the template is populated with data
+                          then appended to the target destination.
+                        </p>
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Display event data
+function displayData(paymentArray) {
+  const myTemplate = document.getElementById('Data-Template');
+  const resultsBody = document.getElementById('resultsBody');
+
+  // clear table first
+  resultsBody.innerHTML = '';
+
+  // Number format reference https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp
+  for (let i = 0; i < paymentArray.length; i++) {
+    const dataRow = document.importNode(myTemplate.content, true);
+
+    dataRow.getElementById('month').textContent = paymentArray[i].month;
+    dataRow.getElementById('payment').textContent = paymentArray[
+      i
+    ].payment.toLocaleString('en-US', {
+      style: 'decimal',
+      minimumFractionDigits: '2',
+      maximumFractionDigits: '2',
+    });
+    dataRow.getElementById('principal').textContent = paymentArray[
+      i
+    ].principal.toLocaleString('en-US', {
+      style: 'decimal',
+      minimumFractionDigits: '2',
+      maximumFractionDigits: '2',
+    });
+    dataRow.getElementById('interest').textContent = paymentArray[
+      i
+    ].interest.toLocaleString('en-US', {
+      style: 'decimal',
+      minimumFractionDigits: '2',
+      maximumFractionDigits: '2',
+    });
+    dataRow.getElementById('totalInterest').textContent = paymentArray[
+      i
+    ].totalInterest.toLocaleString('en-US', {
+      style: 'decimal',
+      minimumFractionDigits: '2',
+      maximumFractionDigits: '2',
+    });
+    dataRow.getElementById('balance').textContent = paymentArray[
+      i
+    ].balance.toLocaleString('en-US', {
+      style: 'decimal',
+      minimumFractionDigits: '2',
+      maximumFractionDigits: '2',
+    });
+
+    resultsBody.appendChild(dataRow);
+  }
+}
+</code></pre>
+                        <!-- End Code -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End of Collapsible Sections -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">&copy; Josue Cedeno 2021</span>
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Prism -->
+    <script src="/js/prism-twilight.js"></script>
+  </body>
+</html>
