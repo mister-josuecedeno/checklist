@@ -6,6 +6,13 @@ var seedData = [
     createdDate: new Date(),
     dueDate: new Date(),
   },
+  {
+    complete: true,
+    id: 'test2',
+    title: 'Test Title 2',
+    createdDate: new Date(),
+    dueDate: new Date(),
+  },
 ];
 
 // This for TESTING PURPOSE (Comment out later)
@@ -24,7 +31,13 @@ function setLocalStorage(array) {}
 
 //     CRUD Functions
 function addTask() {}
-function toggleComplete() {}
+function toggleComplete(e) {
+  if (e.checked) {
+    console.log('checked');
+  } else {
+    console.log('not checked');
+  }
+}
 function deleteTask() {}
 function editTask() {}
 function getUUID() {
@@ -53,7 +66,8 @@ function displayData(checklistArray) {
 
     // Checkbox
     let isChecked = checklistArray[i].complete;
-    let checkbox = `<input type="checkbox" name="chkComplete" id="chkComplete" checked="${isChecked}"/>`;
+    let chkValue = isChecked ? 'checked' : '';
+    let checkbox = `<input onClick="toggleComplete(this)" type="checkbox" name="chkComplete" id="chkComplete" ${chkValue}/>`;
 
     dataRow.getElementById('complete').innerHTML = checkbox;
 
