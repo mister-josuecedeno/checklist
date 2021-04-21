@@ -172,9 +172,9 @@ function getUUID() {
   return uuidv4();
 }
 
-//     Filter Functions (next version)
+//     Filter Functions (Refactor show complete and incomplete)
 function showIncompletes() {
-  console.log('Show Incompletes');
+  // console.log('Show Incompletes');
 
   // Filter Local Storage for complete = false
   let tasks = getLocalStorage();
@@ -188,11 +188,30 @@ function showIncompletes() {
 }
 
 function showCompletes() {
-  console.log('Show Completes');
+  // console.log('Show Completes');
+
+  // Filter Local Storage for complete = false
+  let tasks = getLocalStorage();
+  let filtered = tasks.filter((t) => t.complete === true);
+
+  // Update modelData
+  modelData = filtered;
+
+  // Display Data (modelData)
+  displayData(modelData);
 }
 
 function showAll() {
-  console.log('Show All');
+  // console.log('Show All');
+
+  // Filter Local Storage for complete = false
+  let tasks = getLocalStorage();
+
+  // Update modelData
+  modelData = tasks;
+
+  // Display Data (modelData)
+  displayData(modelData);
 }
 
 function showDueToday() {
