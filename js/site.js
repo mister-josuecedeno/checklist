@@ -77,10 +77,10 @@ function addTask() {
   task['task'] = document.getElementById('newTask').value;
 
   //     Generate Today's Date - https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight
-  task['createdDate'] = new Date();
+  task['createdDate'] = setDateTime(new Date());
 
   // Retrieve Due Date from Form
-  task['dueDate'] = document.getElementById('newDueDate').value;
+  task['dueDate'] = setDateTime(document.getElementById('newDueDate').value);
 
   // Push to array
   tasks.push(task);
@@ -96,6 +96,23 @@ function addTask() {
 
   // Display Data
   displayData(modelData);
+}
+
+// Date to midnight
+function setDateTime(dateInput) {
+  let date = dateInput;
+  let mthAdjust = 1;
+
+  if (typeof dateInput === 'string') {
+    let [year, month, day] = dateInput.split('-');
+    mthAdjust = 0;
+    date = new Date(year, month, day);
+  }
+
+  const day = date.getDate(); // Returns the date
+  const month = date.getMonth() + mthAdjust; // Returns the month (adjusted based on type - string or object)
+  const year = date.getFullYear(); // Returns the year
+  return `${month}/${day}/${year}`;
 }
 
 function toggleComplete(e) {
