@@ -57,8 +57,6 @@ function setLocalStorage(array) {
 
 //     CRUD Functions
 function addTask() {
-  console.log('Add Event');
-
   // Get array from local storage
   const tasks = getLocalStorage();
 

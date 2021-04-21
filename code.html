@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Mortgage Calculator</title>
+    <title>Checklist</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -106,15 +106,23 @@
                 <!-- Introduction -->
                 <section>
                   <p class="text-white">
-                    The application populates two sections using the following
-                    functions:
+                    The application manages tasks using the following function
+                    groups:
                   </p>
                   <ul class="text-light">
-                    <li>buildPaymentSchedule</li>
-                    <li>calculatePayment</li>
-                    <li>getPayments</li>
-                    <li>displayStats</li>
-                    <li>displayData</li>
+                    <li>Data Management</li>
+                    <ol>
+                      <li>Build Checklist</li>
+                    </ol>
+                    <li>Business Logic</li>
+
+                    <ol>
+                      <li>Add Tasks</li>
+                      <li>Mark Tasks as Complete / Incomplete</li>
+                      <li>Delete Tasks</li>
+                    </ol>
+
+                    <li>Data Display</li>
                   </ul>
                   <h6 class="card-text ml-1 mb-3 text-white">
                     Click the section links below to learn more about the code.
@@ -122,8 +130,8 @@
                 </section>
 
                 <!-- Collapsible Sections -->
-                <div class="accordion" id="accordionMortgageCalculator">
-                  <!-- Build Payment Schedule -->
+                <div class="accordion" id="accordionChecklist">
+                  <!-- Data Management -->
                   <div class="card">
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
@@ -131,60 +139,78 @@
                           class="btn btn-link"
                           type="button"
                           data-toggle="collapse"
-                          data-target="#collapseBuildPaymentSchedule"
+                          data-target="#collapseBuildChecklist"
                           aria-expanded="true"
-                          aria-controls="collapseBuildPaymentSchedule"
+                          aria-controls="collapseBuildChecklist"
                         >
-                          Build Payment Schedule
+                          Build Checklist
                         </button>
                       </h2>
                     </div>
 
                     <div
-                      id="collapseBuildPaymentSchedule"
+                      id="collapseBuildChecklist"
                       class="collapse show"
                       aria-labelledby="headingOne"
-                      data-parent="#accordionMortgageCalculator"
+                      data-parent="#accordionChecklist"
                     >
                       <div class="card-body">
-                        <h5>Build Payment Schedule</h5>
+                        <h5>Build Checklist</h5>
                         <p class="mb-3">
                           This function is the trigger point of the application.
+                          Helper functions (<strong>getLocalStorage</strong>,
+                          <strong>setLocalStorage</strong>) are used to access
+                          local storage.
                         </p>
                         <p>
-                          <span class="badge badge-info">Lines 3 - 5</span>
-                          Return the required form data.
+                          <span class="badge badge-info">Lines 8 - 10</span>
+                          Return seed data for testing purposes
                         </p>
                         <p>
-                          <span class="badge badge-info">Line 7</span>
-                          Returns the mortgage payment using the provided form
-                          data.
-                        </p>
-                        <p>
-                          <span class="badge badge-info">Line 8</span>
-                          Returns the calculated array of payments based on the
-                          variables provided.
-                        </p>
-                        <p>
-                          <span class="badge badge-info">Lines 9 - 10</span>
-                          Call the functions which will display the data
-                          statistics and schedule.
+                          <span class="badge badge-info">Line 13</span>
+                          The variable <strong>modelData</strong> is the focal
+                          point of the application as it the holding space for
+                          display data.
                         </p>
 
                         <!-- Start Code -->
                         <pre
                           class="line-numbers"
-                        ><code class="language-javascript">// Build Payment Schedule
-function buildPaymentSchedule() {
-  let loan = +document.getElementById('loanAmount').value;
-  let months = +document.getElementById('loanTerm').value * 12;
-  let mthRate = (+document.getElementById('loanRate').value * 0.01) / 12;
+                        ><code class="language-javascript">// Build Checklist
+function buildList() {
+  // Change source to LocalStorage
+  // Use seed data if local storage is empty (for testing only)
+  let local = getLocalStorage();
 
-  let payment = calculatePayment(loan, months, mthRate);
-  let paymentArray = getPayments(loan, payment, months, mthRate);
-  displayStats(payment, loan, paymentArray);
-  displayData(paymentArray);
-  return false;
+  // This for TESTING PURPOSE (Comment out later)
+  if (local.length === 0) {
+    setLocalStorage(seedData);
+    local = getLocalStorage();
+  }
+
+  modelData = local;
+
+  displayData(modelData);
+}
+</code></pre>
+                        <!-- End Code -->
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Get Local Storage
+function getLocalStorage() {
+  return JSON.parse(localStorage.getItem('taskArray')) || [];
+}
+</code></pre>
+                        <!-- End Code -->
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Set Local Storage
+function setLocalStorage(array) {
+  localStorage.setItem('taskArray', JSON.stringify(array));
 }
 </code></pre>
                         <!-- End Code -->
@@ -192,7 +218,7 @@ function buildPaymentSchedule() {
                     </div>
                   </div>
 
-                  <!-- Event Data -->
+                  <!-- Add Task -->
                   <div class="card">
                     <div class="card-header" id="headingTwo">
                       <h2 class="mb-0">
@@ -200,37 +226,98 @@ function buildPaymentSchedule() {
                           class="btn btn-link collapsed"
                           type="button"
                           data-toggle="collapse"
-                          data-target="#collapseCalculatePayment"
+                          data-target="#collapseAddTask"
                           aria-expanded="false"
-                          aria-controls="collapseCalculatePayment"
+                          aria-controls="collapseAddTask"
                         >
-                          Calculate Payment
+                          Add Task
                         </button>
                       </h2>
                     </div>
                     <div
-                      id="collapseCalculatePayment"
+                      id="collapseAddTask"
                       class="collapse"
                       aria-labelledby="headingTwo"
-                      data-parent="#accordionMortgageCalculator"
+                      data-parent="#accordionChecklist"
                     >
                       <div class="card-body">
-                        <h5>Calculate Payment</h5>
+                        <h5>Add Task</h5>
 
                         <p class="mb-3">
-                          Standard mortgage payment calculation sourced from
-                          Oreilly.com
+                          The Add Task function creates an object which is then
+                          pushed to the task array. The array is then saved to
+                          local storage.
+                        </p>
+                        <p>
+                          <span class="badge badge-info">Lines 20 - 23</span>
+                          Both date fields use a helper function
+                          (<strong>setDateTime</strong>) to adjust for the
+                          impact of time.
                         </p>
 
                         <!-- Start Code -->
                         <pre
                           class="line-numbers"
-                        ><code class="language-javascript">// Calculate Payment
-function calculatePayment(loan, months, mthRate) {
-  let x = Math.pow(1 + mthRate, months);
-  return (loan * x * mthRate) / (x - 1);
+                        ><code class="language-javascript">// Add Task
+function addTask() {
 
-  // Source: https://www.oreilly.com/library/view/javascript-the-definitive/0596000480/ch01s08.html
+  // Get array from local storage
+  const tasks = getLocalStorage();
+
+  // Task Object
+  const task = {};
+
+  // Set complete to false
+  task['complete'] = false;
+
+  //     Get UUID
+  task['id'] = getUUID();
+
+  // Retrieve task from modal form
+  task['task'] = document.getElementById('newTask').value;
+
+  //     Generate Today's Date - https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight
+  task['createdDate'] = setDateTime(new Date());
+
+  // Retrieve Due Date from Form
+  task['dueDate'] = setDateTime(document.getElementById('newDueDate').value);
+
+  // Push to array
+  tasks.push(task);
+
+  // Set array in local storage
+  setLocalStorage(tasks);
+
+  // Set modelData to new data
+  modelData = getLocalStorage();
+
+  // Reset form
+  document.getElementById('newTaskForm').reset();
+
+  // Display Data
+  displayData(modelData);
+}
+</code></pre>
+                        <!-- End Code -->
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Set Date and Time
+function setDateTime(dateInput) {
+  let date = dateInput;
+  let mthAdjust = 1;
+
+  if (typeof dateInput === 'string') {
+    let [year, month, day] = dateInput.split('-');
+    mthAdjust = 0;
+    date = new Date(year, month, day);
+  }
+
+  const day = date.getDate(); // Returns the date
+  const month = date.getMonth() + mthAdjust; // Returns the month (adjusted based on type - string or object)
+  const year = date.getFullYear(); // Returns the year
+  return `${month}/${day}/${year}`;
 }
 </code></pre>
                         <!-- End Code -->
@@ -238,7 +325,7 @@ function calculatePayment(loan, months, mthRate) {
                     </div>
                   </div>
 
-                  <!-- Get Payments -->
+                  <!-- Mark Task as Complete / Incomplete -->
                   <div class="card">
                     <div class="card-header" id="headingThree">
                       <h2 class="mb-0">
@@ -246,77 +333,82 @@ function calculatePayment(loan, months, mthRate) {
                           class="btn btn-link collapsed"
                           type="button"
                           data-toggle="collapse"
-                          data-target="#collapseGetPayments"
+                          data-target="#collapseTaskComplete"
                           aria-expanded="false"
-                          aria-controls="collapseGetPayments"
+                          aria-controls="collapseTaskComplete"
                         >
-                          Get Payments
+                          Mark Task as Complete / Incomplete
                         </button>
                       </h2>
                     </div>
                     <div
-                      id="collapseGetPayments"
+                      id="collapseTaskComplete"
                       class="collapse"
                       aria-labelledby="headingThree"
-                      data-parent="#accordionMortgageCalculator"
+                      data-parent="#accordionChecklist"
                     >
                       <div class="card-body">
-                        <h5>Get Payments</h5>
+                        <h5>Mark Task as Complete / Incomplete</h5>
                         <p class="mb-3">
-                          The objective of function is to return the
-                          amortization data as an array.
+                          Using the helper function (<strong>getId</strong>) the
+                          array object is retrieved. It is then updated and
+                          returned to local storage.
                         </p>
                         <p>
-                          <span class="badge badge-info">Lines 9 - 25</span>
-                          A for loop is used to iteratively build the array by
-                          calculating a data object for each month.
+                          <span class="badge badge-info">Line 15</span>
+                          The object id is retrieved.
                         </p>
                         <p>
-                          <span class="badge badge-info">Lines 12 - 15</span>
-                          Calculates those variables which change with each
-                          iteration.
-                        </p>
-                        <p>
-                          <span class="badge badge-info">Lines 17 - 22</span>
-                          Populate an object with the required fields. This
-                          object is then pushed to the array.
+                          <span class="badge badge-info">Line 21</span>
+                          The object id is updated.
                         </p>
 
                         <!-- Start Code -->
                         <pre
                           class="line-numbers"
-                        ><code class="language-javascript">// Get Payments (build payment array)
-function getPayments(loan, payment, months, mthRate) {
-  let paymentArray = [];
-  let totalInterest = 0;
-  let balance = loan;
-  let interest = 0;
-  let principal = 0;
+                        ><code class="language-javascript">// Mark as Complete / Incomplete
+function toggleComplete(e) {
+  let isComplete;
 
-  for (let i = 1; i <= months; i++) {
-    let obj = {};
+  if (e.checked) {
+    isComplete = true;
+  } else {
+    isComplete = false;
+  }
 
-    interest = balance * mthRate;
-    principal = payment - interest;
-    totalInterest += interest;
-    balance -= principal;
+  // Get Tasks
+  let tasks = getLocalStorage();
 
-    obj['month'] = i;
-    obj['payment'] = payment;
-    obj['principal'] = principal;
-    obj['interest'] = interest;
-    obj['totalInterest'] = totalInterest;
-    obj['balance'] = Math.abs(balance); // Fix negative value
+  // Task Id
+  let taskId = getId(e);
 
-    paymentArray.push(obj);
-  }                          
+  // Find where id matches Task ID
+  let task = tasks.find((t) => t.id === taskId);
+
+  // Update object element
+  task.complete = isComplete;
+
+  // Set Array
+  setLocalStorage(tasks);
+  displayData(getLocalStorage());
+}        
+</code></pre>
+                        <!-- End Code -->
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// Helper function
+function getId(e) {
+  return e.parentElement.parentElement.children[1].innerText;
+}        
 </code></pre>
                         <!-- End Code -->
                       </div>
                     </div>
                   </div>
 
-                  <!-- Display Stats -->
+                  <!-- Delete Task -->
                   <div class="card">
                     <div class="card-header" id="headingFour">
                       <h2 class="mb-0">
@@ -324,70 +416,54 @@ function getPayments(loan, payment, months, mthRate) {
                           class="btn btn-link collapsed"
                           type="button"
                           data-toggle="collapse"
-                          data-target="#collapseDisplayStats"
+                          data-target="#collapseDeleteTask"
                           aria-expanded="false"
-                          aria-controls="collapseDisplayStats"
+                          aria-controls="collapseDeleteTask"
                         >
-                          Display Stats
+                          Delete Tasks
                         </button>
                       </h2>
                     </div>
                     <div
-                      id="collapseDisplayStats"
+                      id="collapseDeleteTask"
                       class="collapse"
                       aria-labelledby="headingFour"
-                      data-parent="#accordionMortgageCalculator"
+                      data-parent="#accordionChecklist"
                     >
                       <div class="card-body">
-                        <h5>Display Stats</h5>
+                        <h5>Delete Tasks</h5>
                         <p class="mb-3">
-                          This function provides the view of the final array
-                          summary statistics. Note that key information for some
-                          fields has already been provided by the function
-                          arguments.
+                          Similar to Mark Task as Complete, the
+                          <strong>getId</strong> was used to retrieve the task
+                          selected.
                         </p>
                         <p>
-                          <span class="badge badge-info">Lines 4 - 5</span>
-                          Calculate the total interest using the reduce function
-                          and total cost. All of the remaining fields have been
-                          provided in the function call.
+                          <span class="badge badge-info">Line 12</span>
+                          The array <strong>filter</strong> method is used to
+                          retrieve all tasks, excluding the selected task. These
+                          tasks are then returned to the array in local storage.
                         </p>
 
                         <!-- Start Code -->
                         <pre
                           class="line-numbers"
-                        ><code class="language-javascript">// Set Stats
-function displayStats(payment, loan, paymentArray) {
-  // Total Interest
-  let totalInterest = paymentArray.reduce((acc, cv) => acc + cv.interest, 0);
-  let totalCost = totalInterest + loan;
+                        ><code class="language-javascript">// Delete Tasks
+function deleteTask(e) {
+  console.log('Delete me!');
 
-  document.getElementById('payment').innerHTML = payment.toLocaleString(
-    'en-US',
-    { style: 'currency', currency: 'USD' }
-  );
-  document.getElementById('totalPrincipal').innerHTML = loan.toLocaleString(
-    'en-US',
-    {
-      style: 'currency',
-      currency: 'USD',
-    }
-  );
-  document.getElementById(
-    'totalInterest'
-  ).innerHTML = totalInterest.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-  document.getElementById('totalCost').innerHTML = totalCost.toLocaleString(
-    'en-US',
-    {
-      style: 'currency',
-      currency: 'USD',
-    }
-  );
-}
-                          
+  // Get Tasks
+  let tasks = getLocalStorage();
+
+  // Task Id
+  let taskId = getId(e);
+
+  // Find where id matches Task ID
+  let tasksfiltered = tasks.filter((t) => t.id !== taskId);
+
+  // Set Array
+  setLocalStorage(tasksfiltered);
+  displayData(getLocalStorage());
+}                          
 </code></pre>
                         <!-- End Code -->
                       </div>
@@ -414,7 +490,7 @@ function displayStats(payment, loan, paymentArray) {
                       id="collapseDisplayData"
                       class="collapse"
                       aria-labelledby="headingFive"
-                      data-parent="#accordionMortgageCalculator"
+                      data-parent="#accordionChecklist"
                     >
                       <div class="card-body">
                         <h5>Display Data</h5>
@@ -422,6 +498,9 @@ function displayStats(payment, loan, paymentArray) {
                           Templates are used to pull the data and dynamically
                           populate the HTML. This technique is particularly
                           powerful as it keeps the HTML out of the Javascript.
+                          In addition, a helper function
+                          (<strong>formatDate</strong>) is used for date
+                          clean-up
                         </p>
                         <p>
                           <span class="badge badge-info">Lines 3 and 4</span>
@@ -436,8 +515,8 @@ function displayStats(payment, loan, paymentArray) {
                         <!-- Start Code -->
                         <pre
                           class="line-numbers"
-                        ><code class="language-javascript">// Display event data
-function displayData(paymentArray) {
+                        ><code class="language-javascript">// Display task data
+function displayData(checklistArray) {
   const myTemplate = document.getElementById('Data-Template');
   const resultsBody = document.getElementById('resultsBody');
 
@@ -445,48 +524,42 @@ function displayData(paymentArray) {
   resultsBody.innerHTML = '';
 
   // Number format reference https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp
-  for (let i = 0; i < paymentArray.length; i++) {
+  for (let i = 0; i < checklistArray.length; i++) {
     const dataRow = document.importNode(myTemplate.content, true);
 
-    dataRow.getElementById('month').textContent = paymentArray[i].month;
-    dataRow.getElementById('payment').textContent = paymentArray[
-      i
-    ].payment.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('principal').textContent = paymentArray[
-      i
-    ].principal.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('interest').textContent = paymentArray[
-      i
-    ].interest.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('totalInterest').textContent = paymentArray[
-      i
-    ].totalInterest.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
-    dataRow.getElementById('balance').textContent = paymentArray[
-      i
-    ].balance.toLocaleString('en-US', {
-      style: 'decimal',
-      minimumFractionDigits: '2',
-      maximumFractionDigits: '2',
-    });
+    // Checkbox
+    let isChecked = checklistArray[i].complete;
+    let chkValue = isChecked ? 'checked' : '';
+    let checkbox = `<input onClick="toggleComplete(this)" type="checkbox" name="chkComplete" id="chkComplete" ${chkValue}/>`;
+
+    dataRow.getElementById('complete').innerHTML = checkbox;
+
+    dataRow.getElementById('id').textContent = checklistArray[i].id;
+    dataRow.getElementById('task').textContent = checklistArray[i].task;
+    dataRow.getElementById('createdDate').textContent = formatDate(
+      checklistArray[i].createdDate
+    );
+    dataRow.getElementById('dueDate').textContent = formatDate(
+      checklistArray[i].dueDate
+    );
+    // dataRow.getElementById('controls').textContent = checklistArray[i].controls;
 
     resultsBody.appendChild(dataRow);
   }
+}
+</code></pre>
+                        <!-- End Code -->
+
+                        <!-- Start Code -->
+                        <pre
+                          class="line-numbers"
+                        ><code class="language-javascript">// formatDate
+function formatDate(strDate) {
+  const date = new Date(strDate);
+  const day = date.getDate(); // Returns the date
+  const month = date.getMonth(); // Returns the month
+  const year = date.getFullYear(); // Returns the year
+  return `${month}/${day}/${year}`;
 }
 </code></pre>
                         <!-- End Code -->
