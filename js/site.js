@@ -172,9 +172,8 @@ function getUUID() {
   return uuidv4();
 }
 
-//     Filter Function
+// Filter Function
 function toggleCompletes(isComplete) {
-  // Filter Local Storage for complete = isComplete
   let tasks = getLocalStorage();
   let filtered = tasks;
 

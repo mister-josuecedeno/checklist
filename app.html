@@ -108,6 +108,9 @@
                   class="btn btn-success"
                   data-toggle="modal"
                   data-target="#addTask"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Add New Task"
                 >
                   <i class="fas fa-plus"></i> Add Task
                 </button>
@@ -116,18 +119,27 @@
                 <button
                   onclick="toggleCompletes(true)"
                   class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Show Completed Tasks"
                 >
-                  Show Completes
+                  <i class="far fa-check-square"></i>
                 </button>
                 <button
                   onclick="toggleCompletes(false)"
                   class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Show Incomplete Tasks"
                 >
-                  Show Incompletes
+                  <i class="far fa-square"></i>
                 </button>
                 <button
                   onclick="toggleCompletes('all')"
                   class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Show All Tasks"
                 >
                   Show All
                 </button>
@@ -233,7 +245,13 @@
           <!-- <button onclick="editTask(this)" class="btn btn-success">
             <i class="fas fa-pencil-alt"></i>
           </button> -->
-          <button onclick="deleteTask(this)" class="btn btn-danger">
+          <button
+            onclick="deleteTask(this)"
+            class="btn btn-danger"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Delete Task"
+          >
             <i class="far fa-trash-alt"></i>
           </button>
         </td>
