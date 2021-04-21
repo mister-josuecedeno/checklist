@@ -222,7 +222,7 @@
       <!-- End of Modal -->
 
       <!-- Edit Task Modal -->
-      <div class="modal" id="editTask">
+      <div class="modal" id="editTaskModal">
         <div class="modal-dialog">
           <div class="modal-content">
             <!-- Header -->
@@ -237,13 +237,13 @@
             <div class="modal-body">
               <form action="" id="editTaskForm">
                 <div class="form-group">
-                  <label for="editTask">Title</label>
+                  <label for="editTask">Task</label>
                   <input
                     type="text"
                     name="editTask"
                     id="editTask"
                     class="form-control"
-                    placeholder="Title"
+                    placeholder="Task"
                   />
                 </div>
 
@@ -297,10 +297,10 @@
         <td class="col" id="controls">
           <!-- Add Edit to next version -->
           <button
-            onclick="editTask(this)"
+            onclick="getTask(this)"
             class="btn btn-success"
             data-toggle="modal"
-            data-target="#editTask"
+            data-target="#editTaskModal"
             data-toggle="tooltip"
             data-placement="top"
             title="Edit Task"
