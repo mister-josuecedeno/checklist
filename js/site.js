@@ -116,11 +116,33 @@ function setDateTime(dateInput) {
 }
 
 function toggleComplete(e) {
+  let isComplete;
+
   if (e.checked) {
-    console.log('checked');
+    isComplete = true;
   } else {
-    console.log('not checked');
+    isComplete = false;
   }
+
+  // Get Tasks
+  let tasks = getLocalStorage();
+
+  // Task Id
+  let taskId = getId(e);
+
+  // Find where id matches Task ID
+  let task = tasks.find((t) => t.id === taskId);
+
+  // Update object element
+  task.complete = isComplete;
+
+  // Set Array
+  setLocalStorage(tasks);
+  displayData(getLocalStorage());
+}
+
+function getId(e) {
+  return e.parentElement.parentElement.children[1].innerText;
 }
 
 function deleteTask(e) {
