@@ -73,10 +73,10 @@ function addTask() {
   task['task'] = document.getElementById('newTask').value;
 
   //     Generate Today's Date - https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight
-  task['createdDate'] = setDateTime(new Date());
+  task['createdDate'] = formatDate(new Date());
 
   // Retrieve Due Date from Form
-  task['dueDate'] = setDateTime(document.getElementById('newDueDate').value);
+  task['dueDate'] = formatDate(document.getElementById('newDueDate').value);
 
   // Push to array
   tasks.push(task);
@@ -92,23 +92,6 @@ function addTask() {
 
   // Display Data
   displayData(modelData);
-}
-
-// Date to midnight
-function setDateTime(dateInput) {
-  let date = dateInput;
-  let mthAdjust = 1;
-
-  if (typeof dateInput === 'string') {
-    let [year, month, day] = dateInput.split('-');
-    mthAdjust = 0;
-    date = new Date(year, month, day);
-  }
-
-  const day = date.getDate(); // Returns the date
-  const month = date.getMonth() + mthAdjust; // Returns the month (adjusted based on type - string or object)
-  const year = date.getFullYear(); // Returns the year
-  return `${month}/${day}/${year}`;
 }
 
 function toggleComplete(e) {
@@ -161,6 +144,19 @@ function deleteTask(e) {
 // Next version
 function editTask(e) {
   console.log('Edit me!');
+  let taskID = getId(e);
+  console.log(taskID);
+}
+
+function getTask(e) {
+  console.log('Get task object for form');
+  let taskID = getId(e);
+  let tasks = getLocalStorage();
+
+  let task = tasks.find((t) => t.id === taskID);
+
+  document.getElementById('editTask').value = task.task;
+  document.getElementById('editDueDate').value = formatFormDate(task.dueDate);
 }
 
 function getTaskCount(taskArray) {
@@ -230,11 +226,42 @@ function displayData(checklistArray) {
   document.getElementById('taskCount').innerHTML = getTaskCount(checklistArray);
 }
 
+// DATE TIME FUNCTIONS
+// Date to midnight
+function setDateTime(dateInput) {
+  let [year, month, day] = getDateParts(dateInput);
+  return `${month}/${day}/${year}`;
+}
+
 // Format Date
 function formatDate(strDate) {
-  const date = new Date(strDate);
-  const day = date.getDate(); // Returns the date
-  const month = date.getMonth(); // Returns the month
-  const year = date.getFullYear(); // Returns the year
+  let [year, month, day] = getDateParts(strDate);
   return `${month}/${day}/${year}`;
+}
+
+// Add padding to year (leading zero)
+function formatFormDate(strDate) {
+  let [year, month, day] = getDateParts(strDate);
+  let strMonth = `0${month}`.slice(-2);
+  let strDay = `0${day}`.slice(-2);
+  return `${year}-${strMonth}-${strDay}`;
+}
+
+function getDateParts(strDate) {
+  // How many types of date?
+
+  let date = new Date(strDate);
+  let mthAdjust = 1;
+
+  if (strDate.length === 10) {
+    let [year, month, day] = strDate.split('-');
+    mthAdjust = 0;
+    date = new Date(year, month, day);
+  }
+
+  const day = date.getDate(); // Returns the date
+  const month = date.getMonth() + mthAdjust; // Returns the month (adjusted based on type - string or object)
+  const year = date.getFullYear(); // Returns the year
+
+  return [year, month, day];
 }
