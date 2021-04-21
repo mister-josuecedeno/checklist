@@ -30,13 +30,11 @@ var modelData = [];
 buildList();
 
 function buildList() {
-  // This for TESTING PURPOSE (Comment out later)
-  // modelData = seedData;
-
   // Change source to LocalStorage
-  // Use seed data if local storage is empty
+  // Use seed data if local storage is empty (for testing only)
   let local = getLocalStorage();
 
+  // This for TESTING PURPOSE (Comment out later)
   if (local.length === 0) {
     setLocalStorage(seedData);
     local = getLocalStorage();
@@ -162,6 +160,7 @@ function deleteTask(e) {
   displayData(getLocalStorage());
 }
 
+// Next version
 function editTask(e) {
   console.log('Edit me!');
 }
@@ -171,7 +170,7 @@ function getUUID() {
   return uuidv4();
 }
 
-//     Filter Functions
+//     Filter Functions (next version)
 function showIncompletes() {}
 function showAll() {}
 function showDueToday() {}
