@@ -172,43 +172,18 @@ function getUUID() {
   return uuidv4();
 }
 
-//     Filter Functions (Refactor show complete and incomplete)
-function showIncompletes() {
-  // console.log('Show Incompletes');
-
-  // Filter Local Storage for complete = false
+//     Filter Function
+function toggleCompletes(isComplete) {
+  // Filter Local Storage for complete = isComplete
   let tasks = getLocalStorage();
-  let filtered = tasks.filter((t) => t.complete === false);
+  let filtered = tasks;
+
+  if (typeof isComplete === 'boolean') {
+    filtered = tasks.filter((t) => t.complete === isComplete);
+  }
 
   // Update modelData
   modelData = filtered;
-
-  // Display Data (modelData)
-  displayData(modelData);
-}
-
-function showCompletes() {
-  // console.log('Show Completes');
-
-  // Filter Local Storage for complete = false
-  let tasks = getLocalStorage();
-  let filtered = tasks.filter((t) => t.complete === true);
-
-  // Update modelData
-  modelData = filtered;
-
-  // Display Data (modelData)
-  displayData(modelData);
-}
-
-function showAll() {
-  // console.log('Show All');
-
-  // Filter Local Storage for complete = false
-  let tasks = getLocalStorage();
-
-  // Update modelData
-  modelData = tasks;
 
   // Display Data (modelData)
   displayData(modelData);

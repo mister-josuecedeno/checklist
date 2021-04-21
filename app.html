@@ -113,13 +113,22 @@
                 </button>
 
                 <!-- Add Filters -->
-                <button onclick="showCompletes()" class="btn btn-secondary">
+                <button
+                  onclick="toggleCompletes(true)"
+                  class="btn btn-secondary"
+                >
                   Show Completes
                 </button>
-                <button onclick="showIncompletes()" class="btn btn-secondary">
+                <button
+                  onclick="toggleCompletes(false)"
+                  class="btn btn-secondary"
+                >
                   Show Incompletes
                 </button>
-                <button onclick="showAll()" class="btn btn-secondary">
+                <button
+                  onclick="toggleCompletes('all')"
+                  class="btn btn-secondary"
+                >
                   Show All
                 </button>
                 <!-- End of Add Filters -->
