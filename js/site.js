@@ -268,10 +268,10 @@ function displayData(checklistArray) {
 
 // DATE TIME FUNCTIONS
 
-function setDateTime(dateInput) {
-  let [year, month, day] = getDateParts(dateInput);
-  return `${month}/${day}/${year}`;
-}
+// function setDateTime(dateInput) {
+//   let [year, month, day] = getDateParts(dateInput);
+//   return `${month}/${day}/${year}`;
+// }
 
 function formatDate(strDate) {
   let [year, month, day] = getDateParts(strDate);
