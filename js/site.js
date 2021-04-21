@@ -163,6 +163,11 @@ function editTask(e) {
   console.log('Edit me!');
 }
 
+function getTaskCount() {
+  let count = getLocalStorage().length || 0;
+  return count;
+}
+
 function getUUID() {
   // https://github.com/uuidjs/uuid
   return uuidv4();
@@ -206,6 +211,9 @@ function displayData(checklistArray) {
 
     resultsBody.appendChild(dataRow);
   }
+
+  // Add Page Count
+  document.getElementById('taskCount').innerHTML = getTaskCount();
 }
 
 // Format Date
