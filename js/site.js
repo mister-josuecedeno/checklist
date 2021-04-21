@@ -163,9 +163,8 @@ function editTask(e) {
   console.log('Edit me!');
 }
 
-function getTaskCount() {
-  let count = getLocalStorage().length || 0;
-  return count;
+function getTaskCount(taskArray) {
+  return taskArray.length || 0;
 }
 
 function getUUID() {
@@ -176,6 +175,16 @@ function getUUID() {
 //     Filter Functions (next version)
 function showIncompletes() {
   console.log('Show Incompletes');
+
+  // Filter Local Storage for complete = false
+  let tasks = getLocalStorage();
+  let filtered = tasks.filter((t) => t.complete === false);
+
+  // Update modelData
+  modelData = filtered;
+
+  // Display Data (modelData)
+  displayData(modelData);
 }
 
 function showCompletes() {
@@ -225,7 +234,7 @@ function displayData(checklistArray) {
   }
 
   // Add Page Count
-  document.getElementById('taskCount').innerHTML = getTaskCount();
+  document.getElementById('taskCount').innerHTML = getTaskCount(checklistArray);
 }
 
 // Format Date
