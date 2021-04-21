@@ -1,22 +1,22 @@
 var seedData = [
   {
     complete: false,
-    id: 'test1',
-    task: 'Test task',
+    id: 'id1',
+    task: 'Sample Overdue Task',
     createdDate: new Date(),
-    dueDate: new Date(),
+    dueDate: setDateOffsetDays(-5),
   },
   {
     complete: true,
-    id: 'test2',
-    task: 'Test task 2',
+    id: 'id2',
+    task: 'Sample Task',
     createdDate: new Date(),
-    dueDate: new Date(),
+    dueDate: setDateOffsetDays(2),
   },
   {
     complete: false,
-    id: 'test3',
-    task: 'Test task 3',
+    id: 'id3',
+    task: 'Task Due Today',
     createdDate: new Date(),
     dueDate: new Date(),
   },
@@ -203,15 +203,26 @@ function toggleCompletes(isComplete) {
 }
 
 function showDueToday() {
-  console.log('Show Due Today');
-}
-
-function showOverdue() {
-  console.log('Show Overdue');
-
   let tasks = getLocalStorage();
   let filtered = tasks;
   let today = new Date();
+
+  filtered = tasks.filter(
+    (t) => formatDate(new Date(t.dueDate)) === formatDate(today)
+  );
+
+  // Update modelData
+  modelData = filtered;
+
+  // Display Data (modelData)
+  displayData(modelData);
+}
+
+function showOverdue() {
+  let tasks = getLocalStorage();
+  let filtered = tasks;
+  // let today = new Date();
+  let today = setDateOffsetDays(-1);
 
   filtered = tasks.filter((t) => new Date(t.dueDate) < today);
 
@@ -279,6 +290,12 @@ function formatFormDate(strDate) {
   let strMonth = `0${month}`.slice(-2);
   let strDay = `0${day}`.slice(-2);
   return `${year}-${strMonth}-${strDay}`;
+}
+
+function setDateOffsetDays(days) {
+  let dt = new Date();
+  dt.setDate(dt.getDate() + days);
+  return dt;
 }
 
 function getDateParts(strDate) {
