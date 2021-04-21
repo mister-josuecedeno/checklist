@@ -3,7 +3,7 @@
 [Live Demo](https://josuecedeno-checklist.netlify.app/) |
 [Portfolio](https://josuecedeno.netlify.app/)
 
-![checklist](https://user-images.githubusercontent.com/47830532/115499660-68ca8000-a235-11eb-9321-ea22d7592102.png)
+![checklist](https://user-images.githubusercontent.com/47830532/115595228-4b7ccc80-a29c-11eb-80a0-02a8bb1ea120.png)
 
 ---
 
