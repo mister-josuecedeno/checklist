@@ -1,27 +1,20 @@
-# Coding Challenge - Mortgage Calculator
+# Coding Challenge - Checklist - Daily Coding Todo Application
 
-[Live Demo](https://josuecedeno-mortgage-calculator.netlify.app/) |
+[Live Demo](https://josuecedeno-checklist.netlify.app/) |
 [Portfolio](https://josuecedeno.netlify.app/)
 
-![mortgage-calculator](https://user-images.githubusercontent.com/47830532/115305789-79430380-a12c-11eb-80c1-91bd17d9385f.png)
+![checklist](https://user-images.githubusercontent.com/47830532/115499660-68ca8000-a235-11eb-9321-ea22d7592102.png)
 
 ---
 
 ## Objective
 
-Write a mortgage loan calculator application that takes in three parameters:
-
-1. The amount of money loaned in dollars (balance)
-2. The time over which the loan will be repaid, in months (term)
-3. The percentage rate at which interest will accrue on the loan (rate)
+The assignment is to create a web based application that creates and manages Tasks using Local Storage as the data store.
 
 ## Instructions
 
-The output should include the following:
+The basic functionality should include the following actions:
 
-1. The month (1 corresponding to the 1st month of payment, through the total number of months)
-2. The payment amount
-3. The principal paid this month
-4. The interest paid this month
-5. The total interest paid to date
-6. The remaining loan balance at the end of the month
+1. Create Task
+2. Delete Task
+3. Complete Task
