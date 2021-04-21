@@ -2,21 +2,21 @@ var seedData = [
   {
     complete: false,
     id: 'test1',
-    title: 'Test Title',
+    task: 'Test task',
     createdDate: new Date(),
     dueDate: new Date(),
   },
   {
     complete: true,
     id: 'test2',
-    title: 'Test Title 2',
+    task: 'Test task 2',
     createdDate: new Date(),
     dueDate: new Date(),
   },
   {
     complete: false,
     id: 'test3',
-    title: 'Test Title 3',
+    task: 'Test task 3',
     createdDate: new Date(),
     dueDate: new Date(),
   },
@@ -34,8 +34,15 @@ function buildList() {
   // modelData = seedData;
 
   // Change source to LocalStorage
-  setLocalStorage(seedData);
-  modelData = getLocalStorage();
+  // Use seed data if local storage is empty
+  let local = getLocalStorage();
+
+  if (local.length === 0) {
+    setLocalStorage(seedData);
+    local = getLocalStorage();
+  }
+
+  modelData = local;
 
   displayData(modelData);
 }
@@ -51,7 +58,45 @@ function setLocalStorage(array) {
 // CONTROL Functions
 
 //     CRUD Functions
-function addTask() {}
+function addTask() {
+  console.log('Add Event');
+
+  // Get array from local storage
+  const tasks = getLocalStorage();
+
+  // Task Object
+  const task = {};
+
+  // Set complete to false
+  task['complete'] = false;
+
+  //     Get UUID
+  task['id'] = getUUID();
+
+  // Retrieve task from modal form
+  task['task'] = document.getElementById('newTask').value;
+
+  //     Generate Today's Date - https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight
+  task['createdDate'] = new Date();
+
+  // Retrieve Due Date from Form
+  task['dueDate'] = document.getElementById('newDueDate').value;
+
+  // Push to array
+  tasks.push(task);
+
+  // Set array in local storage
+  setLocalStorage(tasks);
+
+  // Set modelData to new data
+  modelData = getLocalStorage();
+
+  // Reset form
+  document.getElementById('newTaskForm').reset();
+
+  // Display Data
+  displayData(modelData);
+}
 
 function toggleComplete(e) {
   if (e.checked) {
@@ -101,7 +146,7 @@ function displayData(checklistArray) {
     dataRow.getElementById('complete').innerHTML = checkbox;
 
     dataRow.getElementById('id').textContent = checklistArray[i].id;
-    dataRow.getElementById('title').textContent = checklistArray[i].title;
+    dataRow.getElementById('task').textContent = checklistArray[i].task;
     dataRow.getElementById('createdDate').textContent = formatDate(
       checklistArray[i].createdDate
     );
