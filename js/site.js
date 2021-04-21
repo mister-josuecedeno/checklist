@@ -149,13 +149,15 @@ function editTask(e) {
 }
 
 function getTask(e) {
-  console.log('Get task object for form');
   let taskID = getId(e);
   let tasks = getLocalStorage();
 
   let task = tasks.find((t) => t.id === taskID);
 
+  document.getElementById('editComplete').value = task.complete;
+  document.getElementById('editID').value = task.id;
   document.getElementById('editTask').value = task.task;
+  document.getElementById('editCreatedDate').value = task.createdDate;
   document.getElementById('editDueDate').value = formatFormDate(task.dueDate);
 }
 
