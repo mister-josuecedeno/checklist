@@ -206,6 +206,22 @@ function showDueToday() {
   console.log('Show Due Today');
 }
 
+function showOverdue() {
+  console.log('Show Overdue');
+
+  let tasks = getLocalStorage();
+  let filtered = tasks;
+  let today = new Date();
+
+  filtered = tasks.filter((t) => new Date(t.dueDate) < today);
+
+  // Update modelData
+  modelData = filtered;
+
+  // Display Data (modelData)
+  displayData(modelData);
+}
+
 // DISPLAY (View) Functions
 
 // Display checklist data
