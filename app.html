@@ -117,8 +117,8 @@
                 <thead class="thead-light">
                   <tr class="d-flex">
                     <th class="col-1"></th>
-                    <th class="col d-none d-md-block">ID</th>
-                    <th class="col-4">Task</th>
+                    <th class="col d-none">ID</th>
+                    <th class="col-5">Task</th>
                     <th class="col d-none d-md-block">Created</th>
                     <th class="col">Due Date</th>
                     <th class="col"></th>
@@ -195,19 +195,22 @@
     </footer>
 
     <!-- Template doesn't render on the body -->
+    <!-- <td class="col d-none d-md-block" id="id"></td> -->
     <template id="Data-Template">
       <tr class="d-flex">
         <td class="col-1" id="complete">
           <input type="checkbox" name="" id="" />
         </td>
-        <td class="col d-none d-md-block" id="id"></td>
-        <td class="col-4" id="task"></td>
+        <td class="col d-none" id="id"></td>
+
+        <td class="col-5" id="task"></td>
         <td class="col d-none d-md-block" id="createdDate"></td>
         <td class="col" id="dueDate"></td>
         <td class="col" id="controls">
-          <button onclick="editTask(this)" class="btn btn-success">
+          <!-- Add Edit to next version -->
+          <!-- <button onclick="editTask(this)" class="btn btn-success">
             <i class="fas fa-pencil-alt"></i>
-          </button>
+          </button> -->
           <button onclick="deleteTask(this)" class="btn btn-danger">
             <i class="far fa-trash-alt"></i>
           </button>
