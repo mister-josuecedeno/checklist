@@ -174,9 +174,21 @@ function getUUID() {
 }
 
 //     Filter Functions (next version)
-function showIncompletes() {}
-function showAll() {}
-function showDueToday() {}
+function showIncompletes() {
+  console.log('Show Incompletes');
+}
+
+function showCompletes() {
+  console.log('Show Completes');
+}
+
+function showAll() {
+  console.log('Show All');
+}
+
+function showDueToday() {
+  console.log('Show Due Today');
+}
 
 // DISPLAY (View) Functions
 
