@@ -125,8 +125,6 @@ function getId(e) {
 }
 
 function deleteTask(e) {
-  console.log('Delete me!');
-
   // Get Tasks
   let tasks = getLocalStorage();
 
@@ -141,9 +139,7 @@ function deleteTask(e) {
   displayData(getLocalStorage());
 }
 
-// Next version
 function editTask() {
-  console.log('Edit me!');
   // Get array from local storage
   const tasks = getLocalStorage();
 
@@ -284,7 +280,6 @@ function formatDate(strDate) {
   return `${month}/${day}/${year}`;
 }
 
-// Add padding to year (leading zero)
 function formatFormDate(strDate) {
   let [year, month, day] = getDateParts(strDate);
   let strMonth = `0${month}`.slice(-2);
