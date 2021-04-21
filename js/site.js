@@ -147,6 +147,19 @@ function getId(e) {
 
 function deleteTask(e) {
   console.log('Delete me!');
+
+  // Get Tasks
+  let tasks = getLocalStorage();
+
+  // Task Id
+  let taskId = getId(e);
+
+  // Find where id matches Task ID
+  let tasksfiltered = tasks.filter((t) => t.id !== taskId);
+
+  // Set Array
+  setLocalStorage(tasksfiltered);
+  displayData(getLocalStorage());
 }
 
 function editTask(e) {
