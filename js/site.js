@@ -229,9 +229,8 @@ function showOverdue() {
   displayData(modelData);
 }
 
-// DISPLAY (View) Functions
+// DISPLAY FUNCTIONS
 
-// Display checklist data
 function displayData(checklistArray) {
   const myTemplate = document.getElementById('Data-Template');
   const resultsBody = document.getElementById('resultsBody');
@@ -268,13 +267,12 @@ function displayData(checklistArray) {
 }
 
 // DATE TIME FUNCTIONS
-// Date to midnight
+
 function setDateTime(dateInput) {
   let [year, month, day] = getDateParts(dateInput);
   return `${month}/${day}/${year}`;
 }
 
-// Format Date
 function formatDate(strDate) {
   let [year, month, day] = getDateParts(strDate);
   return `${month}/${day}/${year}`;
