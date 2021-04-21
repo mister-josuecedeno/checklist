@@ -142,10 +142,26 @@ function deleteTask(e) {
 }
 
 // Next version
-function editTask(e) {
+function editTask() {
   console.log('Edit me!');
-  let taskID = getId(e);
-  console.log(taskID);
+  // Get array from local storage
+  const tasks = getLocalStorage();
+
+  const taskID = document.getElementById('editID').value;
+
+  // Task Object
+  const task = tasks.find((t) => t.id === taskID);
+
+  task['complete'] = document.getElementById('editComplete').value === 'true';
+  task['id'] = document.getElementById('editID').value;
+  task['task'] = document.getElementById('editTask').value;
+  task['createdDate'] = document.getElementById('editCreatedDate').value;
+  task['dueDate'] = document.getElementById('editDueDate').value;
+
+  setLocalStorage(tasks);
+  modelData = getLocalStorage();
+  document.getElementById('editTaskForm').reset();
+  displayData(modelData);
 }
 
 function getTask(e) {
